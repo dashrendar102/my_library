@@ -7,6 +7,7 @@
 #include <chrono>
 #include <cstdio>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 using namespace std::chrono;
