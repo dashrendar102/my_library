@@ -33,3 +33,6 @@
 
 # CMake build files
 build
+
+# Environment variables
+.env
