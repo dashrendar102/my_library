@@ -38,3 +38,4 @@ build
 .env
 # Visual Studio files
 .vs
+.vscode
