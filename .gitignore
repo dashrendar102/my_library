@@ -36,3 +36,5 @@ build
 
 # Environment variables
 .env
+# Visual Studio files
+.vs
