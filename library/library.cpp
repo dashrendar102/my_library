@@ -15,9 +15,6 @@ map<string, Command::CommandType> commandMapping = {
 
 int main(int argc, char *argv[])
 {
-	cout << "Hello CMake." << endl;
-	cout << argc << " args" << endl;
-
 	if (argc > 1 && argv[1] != nullptr)
 	{
 		switch (commandMapping[argv[1]])

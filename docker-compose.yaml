@@ -1,0 +1,12 @@
+services:
+  db:
+    build: ./db_container
+    env_file: ./db_container/.env
+    ports:
+      - 5432:5432
+
+  library:
+    build: .
+    env_file: ./.env
+    depends_on:
+      - db

@@ -5,5 +5,4 @@ COPY ./library /usr/src/app
 WORKDIR /usr/src/app
 RUN cmake .
 RUN make
-RUN export .env
 CMD ["./library"]
