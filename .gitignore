@@ -34,8 +34,6 @@
 # CMake build files
 build
 
-# Environment variables
-.env
 # Visual Studio files
 .vs
 .vscode
