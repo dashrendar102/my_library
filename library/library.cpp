@@ -4,16 +4,17 @@
 #include <algorithm>
 #include "library.h"
 
-const string GET_HELP = "get <barcode>                                  Get book from library by library barcode";
-const string HELP_HELP = "help <command>                                 Get help for a particular command";
-const string NEW_HELP = "new [book|library_book] <properties>           Creates a new book or library book";
-const string UPDATE_HELP = "update [book|library_book] <property> <value>  Updates a book property";
-const string DELETE_HELP = "delete [book|library_book] <barcode>           Deletes a given resource by barcode";
+const string LIST_HELP = "list                                                     List books in library";
+const string GET_HELP = "get <barcode>                                            Get book from library by library barcode";
+const string HELP_HELP = "help <command>                                           Get help for a particular command";
+const string NEW_HELP = "new [book|library_book] <properties>                     Creates a new book or library book";
+const string UPDATE_HELP = "update [book|library_book] <barcode> <property> <value>  Updates a book property";
+const string DELETE_HELP = "delete [book|library_book] <barcode>                     Deletes a given resource by barcode";
 
 void printUsage()
 {
 	cout << "usage: LibraryConsole <command>" << endl;
-	cout << "list                                  List books in library" << endl;
+	cout << LIST_HELP << endl;
 	cout << GET_HELP << endl;
 	cout << HELP_HELP << endl;
 	cout << NEW_HELP << endl;
