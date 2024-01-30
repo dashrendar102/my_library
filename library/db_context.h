@@ -30,6 +30,7 @@ namespace DBContext
         void GetBookByBarcode(long barcode);
         void CreateBook(long barcode, string title, string author, string description);
         void CreateLibraryBook(long library_barcode, long book_barcode);
+        void CreatePatron(long barcode, string name);
         void Update(Types::DBTable table, long barcode, string column, string value);
         void Delete(Types::DBTable table, long barcode);
     };

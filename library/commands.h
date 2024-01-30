@@ -36,6 +36,7 @@ namespace Command
     void GetBookByBarcode(char *barcode);
     void NewBook(char *barcode, char *title, char *author, char *description);
     void NewLibraryBook(char *library_barcode, char *book_barcode);
+    void NewPatron(char *barcode, char *name);
     void Update(Types::DBTable table, long barcode, string column, string value);
     void Delete(Types::DBTable table, long barcode);
 }

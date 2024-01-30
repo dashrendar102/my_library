@@ -128,6 +128,27 @@ namespace Command
         dbContext->CreateLibraryBook(atol(library_barcode), atol(book_barcode));
     }
 
+    void NewPatron(char *barcode, char *name)
+    {
+        string bParam(barcode);
+
+        if (!all_of(bParam.begin(), bParam.end(), ::isdigit))
+        {
+            cerr << "Patron barcode must be a number" << endl;
+            return;
+        }
+
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->CreatePatron(atol(barcode), name);
+    }
+
     void Update(Types::DBTable table, long barcode, string column, string value)
     {
         LibraryDB *dbContext = LibraryDB::GetLibraryDB();
