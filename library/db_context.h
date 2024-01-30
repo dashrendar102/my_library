@@ -23,7 +23,10 @@ namespace DBContext
         static LibraryDB *GetLibraryDB();
         LibraryDB(char *connStr);
 
+        void ListAllLibraryBooks();
         void ListAllBooks();
+        void ListAllPatrons();
+        void ListAllLoans();
         void GetBookByBarcode(long barcode);
         void CreateBook(long barcode, string title, string author, string description);
         void CreateLibraryBook(long library_barcode, long book_barcode);

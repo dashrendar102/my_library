@@ -29,7 +29,10 @@ namespace Command
         Delete
     };
 
+    void ListLibraryBooks();
     void ListBooks();
+    void ListPatrons();
+    void ListLoans();
     void GetBookByBarcode(char *barcode);
     void NewBook(char *barcode, char *title, char *author, char *description);
     void NewLibraryBook(char *library_barcode, char *book_barcode);

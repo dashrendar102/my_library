@@ -5,6 +5,19 @@
 
 namespace Command
 {
+    void ListLibraryBooks()
+    {
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->ListAllLibraryBooks();
+    }
+
     void ListBooks()
     {
         LibraryDB *dbContext = LibraryDB::GetLibraryDB();
@@ -16,6 +29,32 @@ namespace Command
         }
 
         dbContext->ListAllBooks();
+    }
+
+    void ListLoans()
+    {
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->ListAllLoans();
+    }
+
+    void ListPatrons()
+    {
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->ListAllPatrons();
     }
 
     void GetBookByBarcode(char *barcode)
