@@ -203,6 +203,34 @@ namespace DBContext
         }
     }
 
+    void LibraryDB::CreatePatron(long barcode, string name)
+    {
+        try
+        {
+            dbConnection.get()->prepare(
+                "insert_patron",
+                "INSERT INTO patrons (barcode, name) \
+                 VALUES ($1, $2)");
+
+            work transaction(*dbConnection.get());
+            result result = transaction.exec_prepared0("insert_patron", barcode, name);
+            transaction.commit();
+
+            if (result.affected_rows() != 1)
+            {
+                cerr << "Unable to create patron " << name << endl;
+            }
+            else
+            {
+                cout << "Successfully created patron " << name << endl;
+            }
+        }
+        catch (exception const &e)
+        {
+            cerr << "Issue inserting patron into DB: " << e.what() << endl;
+        }
+    }
+
     void LibraryDB::Update(Types::DBTable table, long barcode, string column, string value)
     {
         try

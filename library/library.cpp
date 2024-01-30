@@ -7,7 +7,7 @@
 const string LIST_HELP = "list <optional_resource>                                 List books, patrons, or loans in library";
 const string GET_HELP = "get <barcode>                                            Get book from library by library barcode";
 const string HELP_HELP = "help <command>                                           Get help for a particular command";
-const string NEW_HELP = "new [book|library_book] <properties>                     Creates a new book or library book";
+const string NEW_HELP = "new [book|library_book|patron] <properties>              Creates a new book, library book, or patron";
 const string UPDATE_HELP = "update [book|library_book] <barcode> <property> <value>  Updates a book property";
 const string DELETE_HELP = "delete [book|library_book] <barcode>                     Deletes a given resource by barcode";
 
@@ -61,7 +61,15 @@ void handleHelp(int argc, char *argv[])
 			cout << " * Publisher barcode (same accross all copies of the same book)" << endl
 				 << endl;
 			cout << "Example:" << endl;
-			cout << "./library new library_book 45677654 123454321" << endl;
+			cout << "./library new library_book 45677654 123454321" << endl
+				 << endl;
+			cout << "For a new library patron you'll need:" << endl;
+			cout << " * Library card barcode" << endl;
+			cout << " * Full patron's name" << endl
+				 << endl;
+			cout << "Example:" << endl;
+			cout << "./library new patron 678678678 \"Mary Hatch\"" << endl;
+
 			break;
 
 		case Command::CommandType::Update:
@@ -171,7 +179,20 @@ void handleNewLibraryBook(int argc, char *argv[])
 	}
 	else
 	{
-		Command::NewLibraryBook(argv[3], argv[4]);
+		Command::NewPatron(argv[3], argv[4]);
+	}
+}
+
+void handleNewPatron(int argc, char *argv[])
+{
+	if (argc < 5)
+	{
+		cerr << "Insufficient properties to create a new library patron" << endl;
+		cerr << "See ./library help new" << endl;
+	}
+	else
+	{
+		Command::NewPatron(argv[3], argv[4]);
 	}
 }
 
@@ -179,7 +200,7 @@ void handleNew(int argc, char *argv[])
 {
 	if (argc < 3)
 	{
-		cerr << "Needs a resource type (book or library_book) to create." << endl;
+		cerr << "Needs a resource type (book, library_book, or patron) to create." << endl;
 		cerr << "See ./library help new" << endl;
 	}
 	else
@@ -192,6 +213,10 @@ void handleNew(int argc, char *argv[])
 
 		case Types::DBTable::LibraryBook:
 			handleNewLibraryBook(argc, argv);
+			break;
+
+		case Types::DBTable::Patrons:
+			handleNewPatron(argc, argv);
 			break;
 
 		case Types::DBTable::NotFound:
