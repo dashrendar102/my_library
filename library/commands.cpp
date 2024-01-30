@@ -7,28 +7,111 @@ namespace Command
 {
     void ListBooks()
     {
-        try
-        {
-            char *connStr = getenv("DATABASE_URL");
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
 
-            if (connStr == nullptr)
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->ListAllBooks();
+    }
+
+    void GetBookByBarcode(char *barcode)
+    {
+        string param(barcode);
+
+        if (all_of(param.begin(), param.end(), ::isdigit))
+        {
+            LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+            if (dbContext == nullptr)
             {
-                cerr << "No connection string in ENV. Cannot connect." << endl;
+                cerr << "No valid connection to DB." << endl;
                 return;
             }
 
-            connection c(connStr);
-
-            work w(c);
-            row r = w.exec1("SELECT 1");
-            w.commit();
-
-            cout << "GOT ROW: " << r[0].as<int>() << endl;
+            dbContext->GetBookByBarcode(atol(barcode));
         }
-        catch (exception const &e)
+        else
         {
-            cerr << e.what() << endl;
+            cerr << "Barcode must be a number" << endl;
         }
-        cout << "All books" << endl;
+    }
+
+    void NewBook(char *barcode, char *title, char *author, char *description)
+    {
+        string param(barcode);
+
+        if (!all_of(param.begin(), param.end(), ::isdigit))
+        {
+            cerr << "Barcode must be a number" << endl;
+            return;
+        }
+
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->CreateBook(atol(barcode), title, author, description);
+    }
+
+    void NewLibraryBook(char *library_barcode, char *book_barcode)
+    {
+        string lbParam(library_barcode);
+        string bbParam(book_barcode);
+
+        if (!all_of(lbParam.begin(), lbParam.end(), ::isdigit))
+        {
+            cerr << "Library barcode must be a number" << endl;
+            return;
+        }
+
+        if (!all_of(bbParam.begin(), bbParam.end(), ::isdigit))
+        {
+            cerr << "Book barcode must be a number" << endl;
+            return;
+        }
+
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->CreateLibraryBook(atol(library_barcode), atol(book_barcode));
+    }
+
+    void Update(Types::DBTable table, long barcode, string column, string value)
+    {
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->Update(table, barcode, column, value);
+    }
+
+    void Delete(Types::DBTable table, long barcode)
+    {
+        LibraryDB *dbContext = LibraryDB::GetLibraryDB();
+
+        if (dbContext == nullptr)
+        {
+            cerr << "No valid connection to DB." << endl;
+            return;
+        }
+
+        dbContext->Delete(table, barcode);
     }
 }

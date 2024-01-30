@@ -3,13 +3,18 @@
 
 #pragma once
 
+#include <algorithm>
 #include <map>
 #include <string>
 #include <iostream>
 #include <pqxx/pqxx>
 
+#include "db_context.h"
+#include "types.h"
+
 using namespace std;
 using namespace pqxx;
+using namespace DBContext;
 
 namespace Command
 {
@@ -18,8 +23,16 @@ namespace Command
         NotFound = 0,
         List,
         Get,
-        Help
+        Help,
+        New,
+        Update,
+        Delete
     };
 
     void ListBooks();
+    void GetBookByBarcode(char *barcode);
+    void NewBook(char *barcode, char *title, char *author, char *description);
+    void NewLibraryBook(char *library_barcode, char *book_barcode);
+    void Update(Types::DBTable table, long barcode, string column, string value);
+    void Delete(Types::DBTable table, long barcode);
 }

@@ -43,13 +43,13 @@ namespace Types
 
     string Patrons::ToString()
     {
-        return StrJoin({to_string(Id), Name, to_string(Barcode)}, ", ");
+        strPair pairs("my", "string");
+        return StrJoin({to_string(Barcode), Name}, ", ");
     }
 
     string Books::ToString()
     {
-        return Id + ", " +
-               to_string(Barcode) + ", " +
+        return to_string(Barcode) + ", " +
                Title + ", " +
                Author + ",\n" +
                Description;
@@ -57,9 +57,8 @@ namespace Types
 
     string LibraryBooks::ToString()
     {
-        return Id + ", " +
-               to_string(LibraryBarcode) + ", " +
-               to_string(BookId) + ", ";
+        return to_string(LibraryBarcode) + ", " +
+               to_string(BookBarcode) + ", ";
     }
 
     string Loans::ToString()

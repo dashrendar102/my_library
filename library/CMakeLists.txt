@@ -3,7 +3,16 @@
 #
 
 # Add source to this project's executable.
-add_executable (library "library.cpp" "library.h" "commands.cpp" "commands.h")
+add_executable (
+  library
+  "library.cpp"
+  "library.h"
+  "types.cpp"
+  "types.h"
+  "db_context.cpp"
+  "db_context.h"
+  "commands.cpp"
+  "commands.h")
 
 target_link_libraries(library -lpqxx -lpq)
 

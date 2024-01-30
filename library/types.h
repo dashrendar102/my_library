@@ -8,18 +8,29 @@
 #include <cstdio>
 #include <sstream>
 #include <vector>
+#include <map>
 
 using namespace std;
 using namespace std::chrono;
 
+typedef pair<string, string> strPair;
+
 namespace Types
 {
+    enum class DBTable
+    {
+        NotFound = 0,
+        Book,
+        LibraryBook,
+        Patrons,
+        Loans
+    };
+
     class Patrons
     {
     public:
-        int Id;
         string Name;
-        int Barcode;
+        long Barcode;
 
         string ToString();
     };
@@ -27,7 +38,6 @@ namespace Types
     class Books
     {
     public:
-        int Id;
         int Barcode;
         string Title;
         string Author;
@@ -39,9 +49,8 @@ namespace Types
     class LibraryBooks
     {
     public:
-        int Id;
         long LibraryBarcode;
-        int BookId;
+        int BookBarcode;
 
         string ToString();
     };
