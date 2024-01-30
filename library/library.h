@@ -7,5 +7,32 @@
 #include <map>
 
 #include "commands.h"
+#include "types.h"
 
 using namespace std;
+
+map<string, Command::CommandType> commandMapping = {
+    {"l", Command::CommandType::List},
+    {"list", Command::CommandType::List},
+
+    {"g", Command::CommandType::Get},
+    {"get", Command::CommandType::Get},
+
+    {"h", Command::CommandType::Help},
+    {"help", Command::CommandType::Help},
+
+    {"n", Command::CommandType::New},
+    {"new", Command::CommandType::New},
+
+    {"u", Command::CommandType::Update},
+    {"update", Command::CommandType::Update},
+
+    {"d", Command::CommandType::Delete},
+    {"delete", Command::CommandType::Delete}};
+
+map<string, Types::DBTable> dbTableMapping = {
+    {"b", Types::DBTable::Book},
+    {"book", Types::DBTable::Book},
+
+    {"lb", Types::DBTable::LibraryBook},
+    {"library_book", Types::DBTable::LibraryBook}};

@@ -1,6 +1,9 @@
 # my_library
 A simple library management console program created by Lawrence Williams.
 
-Can be run with
-`docker build -t my_library .`
-`docker run --rm -it --link <db_container>:mydb --env-file .env my_library ./library <command with args>`
+Can be built (and DB started) with:
+`docker compose build && docker compose run -d`
+
+To run commands against the `library` executable:
+`docker compose run --rm library bash`
+`./library <command with args>`
