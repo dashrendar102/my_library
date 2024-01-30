@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "library.h"
 
-const string LIST_HELP = "list                                                     List books in library";
+const string LIST_HELP = "list <optional_resource>                                 List books, patrons, or loans in library";
 const string GET_HELP = "get <barcode>                                            Get book from library by library barcode";
 const string HELP_HELP = "help <command>                                           Get help for a particular command";
 const string NEW_HELP = "new [book|library_book] <properties>                     Creates a new book or library book";
@@ -33,7 +33,11 @@ void handleHelp(int argc, char *argv[])
 		switch (commandMapping[argv[2]])
 		{
 		case Command::CommandType::List:
-			cout << "Lists all books in the library by library barcode (not publisher barcode)" << endl;
+			cout << "Lists all books, library_books, patrons, or loans in the library" << endl
+				 << endl;
+			cout << "Examples:" << endl;
+			cout << "./library list" << endl;
+			cout << "./library list patrons" << endl;
 			break;
 
 		case Command::CommandType::Get:
@@ -85,6 +89,39 @@ void handleHelp(int argc, char *argv[])
 
 		case Command::CommandType::Help:
 			cout << HELP_HELP << endl;
+			break;
+		}
+	}
+}
+
+void handleList(int argc, char *argv[])
+{
+	if (argc < 3)
+	{
+		Command::ListLibraryBooks();
+	}
+	else
+	{
+		switch (dbTableMapping[argv[2]])
+		{
+		case Types::DBTable::Book:
+			Command::ListBooks();
+			break;
+
+		case Types::DBTable::LibraryBook:
+			Command::ListLibraryBooks();
+			break;
+
+		case Types::DBTable::Patrons:
+			Command::ListPatrons();
+			break;
+
+		case Types::DBTable::Loans:
+			Command::ListLoans();
+			break;
+
+		case Types::DBTable::NotFound:
+			cerr << "Unknown resource type " << argv[2] << endl;
 			break;
 		}
 	}
@@ -245,7 +282,7 @@ int main(int argc, char *argv[])
 		switch (commandMapping[argv[1]])
 		{
 		case Command::CommandType::List:
-			Command::ListBooks();
+			handleList(argc, argv);
 			break;
 
 		case Command::CommandType::Get:

@@ -83,7 +83,7 @@ namespace DBContext
         }
     }
 
-    void LibraryDB::ListAllBooks()
+    void LibraryDB::ListAllLibraryBooks()
     {
         string query =
             "SELECT lb.library_barcode, b.title, b.author, b.barcode \
@@ -92,6 +92,42 @@ namespace DBContext
              ON b.barcode = lb.book_barcode;";
 
         string headers = "Library Barcode, Title, Author, Publisher Barcode";
+
+        queryHelper(query, headers);
+    }
+
+    void LibraryDB::ListAllBooks()
+    {
+        string query =
+            "SELECT title, author, barcode \
+             FROM books;";
+
+        string headers = "Title, Author, Barcode";
+
+        queryHelper(query, headers);
+    }
+
+    void LibraryDB::ListAllPatrons()
+    {
+        string query =
+            "SELECT name, barcode \
+             FROM patrons;";
+
+        string headers = "Name, Barcode";
+
+        queryHelper(query, headers);
+    }
+
+    void LibraryDB::ListAllLoans()
+    {
+        string query =
+            "SELECT p.name, b.title, b.author, lb.library_barcode \
+             FROM loans AS l \
+             INNER JOIN patrons AS p ON l.patron_barcode = p.barcode \
+             INNER JOIN library_books AS lb ON lb.library_barcode = l.library_book_barcode \
+             INNER JOIN books AS b ON b.barcode = lb.book_barcode;";
+
+        string headers = "Name, Title, Author, Library Barcode";
 
         queryHelper(query, headers);
     }

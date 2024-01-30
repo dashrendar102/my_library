@@ -33,6 +33,16 @@ map<string, Command::CommandType> commandMapping = {
 map<string, Types::DBTable> dbTableMapping = {
     {"b", Types::DBTable::Book},
     {"book", Types::DBTable::Book},
+    {"books", Types::DBTable::Book},
 
     {"lb", Types::DBTable::LibraryBook},
-    {"library_book", Types::DBTable::LibraryBook}};
+    {"library_book", Types::DBTable::LibraryBook},
+    {"library_books", Types::DBTable::LibraryBook},
+
+    {"p", Types::DBTable::Patrons},
+    {"patron", Types::DBTable::Patrons},
+    {"patrons", Types::DBTable::Patrons},
+
+    {"l", Types::DBTable::Loans},
+    {"loan", Types::DBTable::Loans},
+    {"loans", Types::DBTable::Loans}};
