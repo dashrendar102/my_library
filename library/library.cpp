@@ -179,7 +179,7 @@ void handleNewLibraryBook(int argc, char *argv[])
 	}
 	else
 	{
-		Command::NewPatron(argv[3], argv[4]);
+		Command::NewLibraryBook(argv[3], argv[4]);
 	}
 }
 
